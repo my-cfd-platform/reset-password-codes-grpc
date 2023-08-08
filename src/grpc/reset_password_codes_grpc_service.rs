@@ -32,7 +32,7 @@ impl ResetPasswordCodesService for GrpcService {
         let _ = my_grpc_extensions::get_telemetry(
             &request.metadata(),
             request.remote_addr(),
-            "resolve_email_by_id",
+            "verify_code",
         );
 
         let request = request.into_inner();
