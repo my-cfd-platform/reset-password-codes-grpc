@@ -16,6 +16,7 @@ rust-extensions = { tag = "0.1.3", git = "https://github.com/MyJetTools/rust-ext
 flurl = { tag = "0.4.0", git = "https://github.com/MyJetTools/fl-url.git" }
 
 my-grpc-extensions = { tag = "0.4.0", git = "https://github.com/MyJetTools/my-grpc-extensions.git" }
+my-grpc-server-macros = { tag = "0.1.0", git = "https://github.com/MyJetTools/my-grpc-server-macros.git" }
 
 my-settings-reader = { tag = "0.1.5", git = "https://github.com/MyJetTools/my-settings-reader.git", features = [
     "background-reader",

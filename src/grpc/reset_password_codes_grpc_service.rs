@@ -1,19 +1,16 @@
+use my_grpc_server_macros::with_telemetry;
+
 use super::server::GrpcService;
 use crate::reset_password_codes_grpc::reset_password_codes_service_server::ResetPasswordCodesService;
 use crate::reset_password_codes_grpc::*;
 
 #[tonic::async_trait]
 impl ResetPasswordCodesService for GrpcService {
+    #[with_telemetry]
     async fn generate_reset_password_code(
         &self,
         request: tonic::Request<GenerateResetPasswordCodeRequest>,
     ) -> Result<tonic::Response<GenerateResetPasswordCodeResponse>, tonic::Status> {
-        let _ = my_grpc_extensions::get_telemetry(
-            &request.metadata(),
-            request.remote_addr(),
-            "generate_reset_password_code",
-        );
-
         let request = request.into_inner();
 
         let code =
@@ -24,17 +21,11 @@ impl ResetPasswordCodesService for GrpcService {
             code,
         }));
     }
-
+    #[with_telemetry]
     async fn verify_code(
         &self,
         request: tonic::Request<VerifyCodeRequest>,
     ) -> Result<tonic::Response<VerifyCodeResponse>, tonic::Status> {
-        let _ = my_grpc_extensions::get_telemetry(
-            &request.metadata(),
-            request.remote_addr(),
-            "verify_code",
-        );
-
         let request = request.into_inner();
 
         let trader_id =
