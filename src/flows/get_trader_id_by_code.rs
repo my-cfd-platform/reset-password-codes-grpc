@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use rust_extensions::date_time::DateTimeAsMicroseconds;
+use service_sdk::rust_extensions::date_time::DateTimeAsMicroseconds;
 
 use crate::app::AppContext;
 

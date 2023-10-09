@@ -1,8 +1,8 @@
-use my_grpc_server_macros::with_telemetry;
-
-use super::server::GrpcService;
+use super::grpc_service::GrpcService;
 use crate::reset_password_codes_grpc::reset_password_codes_service_server::ResetPasswordCodesService;
 use crate::reset_password_codes_grpc::*;
+
+service_sdk::macros::use_grpc_server!();
 
 #[tonic::async_trait]
 impl ResetPasswordCodesService for GrpcService {

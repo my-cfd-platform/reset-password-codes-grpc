@@ -1,6 +1,8 @@
 use std::sync::Arc;
 
-use my_seq_logger::SeqLogger;
+use app::AppContext;
+use grpc::grpc_service::GrpcService;
+use reset_password_codes_grpc::reset_password_codes_service_server::ResetPasswordCodesServiceServer;
 
 mod app;
 mod flows;
@@ -14,6 +16,21 @@ pub mod reset_password_codes_grpc {
 
 #[tokio::main]
 async fn main() {
+    let settings_reader = crate::settings::SettingsReader::new(".my-cfd-platform").await;
+    let settings_reader = Arc::new(settings_reader);
+
+    let mut service_context = service_sdk::ServiceContext::new(settings_reader.clone()).await;
+    let app_context = Arc::new(AppContext::new(&settings_reader).await);
+
+    service_context.configure_grpc_server(|builder| {
+        builder.add_grpc_service(ResetPasswordCodesServiceServer::new(GrpcService::new(
+            app_context.clone(),
+        )))
+    });
+
+    service_context.start_application().await;
+
+    /*
     let settings_reader = crate::settings::SettingsReader::new(".my-cfd-platform").await;
 
     let settings_reader = Arc::new(settings_reader);
@@ -43,4 +60,5 @@ async fn main() {
     tokio::spawn(crate::grpc::server::start(app.clone(), 8888));
 
     app.app_states.wait_until_shutdown().await;
+     */
 }

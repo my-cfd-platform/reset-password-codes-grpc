@@ -1,7 +1,7 @@
 use std::sync::Arc;
 
 use rand::Rng;
-use rust_extensions::date_time::DateTimeAsMicroseconds;
+use service_sdk::rust_extensions::date_time::DateTimeAsMicroseconds;
 
 use crate::app::{AppContext, GeneratedCode};
 
