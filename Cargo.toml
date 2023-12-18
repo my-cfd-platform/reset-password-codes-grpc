@@ -6,30 +6,23 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-service-sdk = { tag = "0.2.3", git = "https://github.com/MyJetTools/service-sdk.git", features = [
+service-sdk = { tag = "0.2.5", git = "https://github.com/MyJetTools/service-sdk.git", features = [
     "grpc",
+    "macros",
 ] }
-
-rest-api-wl-shared = { tag = "0.2.0", git = "https://github.com/my-cfd-platform/rest-api-wl-shared.git" }
 
 rand = "*"
 
-
 tonic = { version = "*", features = ["tls", "tls-roots", "prost"] }
-hyper = { version = "*", features = ["full"] }
 tokio = { version = "*", features = ["full"] }
 tokio-util = "*"
 prost = "*"
 prost-types = "*"
-anyhow = "*"
-signal-hook = "*"
-tokio-postgres = { version = "*" }
+
 serde = "*"
 serde_yaml = "*"
 serde_derive = "*"
 serde_postgres = "*"
-tokio-pg-mapper = "*"
-tokio-pg-mapper-derive = "*"
 uuid = { version = "*", features = ["v4"] }
 sha2 = "*"
 async-trait = "*"
